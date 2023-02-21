@@ -94,8 +94,6 @@ class Sender {
     } catch {
       killService = false;
     }
-    const dir = path.resolve(__dirname, "..", "tokens");
-    fs.rmSync(dir, { recursive: true, force: true });
     this.qr = {} as QrCodeModel;
     const logOutData: ILogOutModel = {
       logOut,

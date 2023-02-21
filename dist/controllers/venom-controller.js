@@ -13,10 +13,15 @@ const sender = new _sender.default();
 const inicialize = (request, response) => {
   try {
     const dir = _path.default.resolve(__dirname, "..", "tokens");
-    _fs.default.rmSync(dir, {
-      recursive: true,
-      force: true
-    });
+    try {
+      _fs.default.rmSync(dir, {
+        recursive: true,
+        force: true
+      });
+      console.log("deletou tokens");
+    } catch (error) {
+      console.log("não deletou a pasta");
+    }
     sender.initialize();
     response.status(200).send({
       statusDescription: "Inicializando...",
@@ -119,8 +124,20 @@ const getQrCode = async (request, response) => {
   return response.send(pageWithData);
 };
 exports.getQrCode = getQrCode;
-const disconect = (request, response) => {
-  const data = sender.disconect();
-  return response.send(data);
+const disconect = async (request, response) => {
+  const data = await sender.disconect();
+  try {
+    const dir = _path.default.resolve(__dirname, "..", "tokens");
+    _fs.default.rmSync(dir, {
+      recursive: true,
+      force: true
+    });
+  } catch {
+    console.log("nao deletou token no disconect");
+  }
+  return response.send({
+    close: data.logOut,
+    killServiceWork: data.killService
+  });
 };
 exports.disconect = disconect;

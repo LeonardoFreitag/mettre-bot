@@ -4,13 +4,19 @@ import HandleBarsSpageProvider from "../PageProvider/HandleBarsPageProvider/Hand
 import path from "path";
 import { QrCodeModel } from "../PageProvider/models/QrCodeModel";
 import fs from "fs";
+import { ILogOutModel } from "../PageProvider/models/ILogOutModel";
 
 const sender = new Sender();
 
 export const inicialize = (request: Request, response: Response) => {
   try {
     const dir = path.resolve(__dirname, "..", "tokens");
-    fs.rmSync(dir, { recursive: true, force: true });
+    try {
+      fs.rmSync(dir, { recursive: true, force: true });
+      console.log("deletou tokens");
+    } catch (error) {
+      console.log("não deletou a pasta");
+    }
 
     sender.initialize();
     response
@@ -124,7 +130,17 @@ export const getQrCode = async (request: Request, response: Response) => {
   return response.send(pageWithData);
 };
 
-export const disconect = (request: Request, response: Response) => {
-  const data = sender.disconect();
-  return response.send(data);
+export const disconect = async (request: Request, response: Response) => {
+  const data: ILogOutModel = await sender.disconect();
+  try {
+    const dir = path.resolve(__dirname, "..", "tokens");
+    fs.rmSync(dir, { recursive: true, force: true });
+  } catch {
+    console.log("nao deletou token no disconect");
+  }
+
+  return response.send({
+    close: data.logOut,
+    killServiceWork: data.killService,
+  });
 };
