@@ -13,7 +13,6 @@ export const inicialize = (request: Request, response: Response) => {
     const dir = path.resolve(__dirname, "..", "tokens");
     try {
       fs.rmSync(dir, { recursive: true, force: true });
-      console.log("deletou tokens");
     } catch (error) {
       console.log("não deletou a pasta");
     }
@@ -131,16 +130,8 @@ export const getQrCode = async (request: Request, response: Response) => {
 };
 
 export const disconect = async (request: Request, response: Response) => {
-  const data: ILogOutModel = await sender.disconect();
-  try {
-    const dir = path.resolve(__dirname, "..", "tokens");
-    fs.rmSync(dir, { recursive: true, force: true });
-  } catch {
-    console.log("nao deletou token no disconect");
-  }
-
   return response.send({
-    close: data.logOut,
-    killServiceWork: data.killService,
+    close: true,
+    killServiceWork: true,
   });
 };
