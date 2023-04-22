@@ -1,0 +1,12 @@
+version: '3.7'
+
+services:
+  web:
+    privileged: true
+    container_name: neo-wa-api
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+        - 5000:5000
