@@ -20,6 +20,7 @@
     "express-fileupload": "^1.2.0",
     "express-validator": "^6.9.2",
     "http": "0.0.1-security",
+    "libphonenumber-js": "^1.10.28",
     "mime-types": "^2.1.32",
     "pg": "^8.9.0",
     "qrcode": "^1.4.4",
