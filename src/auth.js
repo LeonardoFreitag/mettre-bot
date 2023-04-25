@@ -4,15 +4,15 @@ const CryptoJS = require("crypto-js");
 
 class Auth {
   static createAuth() {
-    const dt = new Date();
+    // const dt = new Date();
 
-    const d = dt.getDate();
-    const m = dt.getMonth() + 1;
-    const y = dt.getFullYear();
+    // const d = dt.getDate();
+    // const m = dt.getMonth() + 1;
+    // const y = dt.getFullYear();
 
-    const calc = d * m * y;
+    // const calc = d * m * y;
 
-    return CryptoJS.MD5(process.env.SECRET + calc).toString();
+    return CryptoJS.MD5(process.env.SECRET).toString();
   }
 
   static check(req, res, next) {
