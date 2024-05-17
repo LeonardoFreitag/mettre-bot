@@ -69,7 +69,7 @@ app.get("/session-qr/:id", (req, res) => {
   if (connection.getStatus() == ConnectionStatus.QR) {
     res.status(200).send(`<img src="${connection.qr}">`);
   } else {
-    res.status(200).send(`Status: ${connection.getStatusMessage()}`);
+    res.status(201).send(`Status: ${connection.getStatusMessage()}`);
   }
 });
 

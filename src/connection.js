@@ -59,7 +59,7 @@ class Connection {
   
 
   createClient() {
-    const wwebVersion = '2.2407.3';
+    const wwebVersion = '2.2408';
     this.client = new Client({
       restartOnAuthFail: true,
       puppeteer: {
@@ -83,8 +83,8 @@ class Connection {
       webVersion: "2.3000.1012447370",
       webVersionCache: {
         type: 'remote',
-        remotePath: `https://raw.githubusercontent.com/wppconnect-team/wa-version/main/html/${wwebVersion}.html`,
-    },
+        remotePath: 'https://raw.githubusercontent.com/wppconnect-team/wa-version/main/html/2.2410.1.html',
+        },
     });
 
     this.client.initialize();
