@@ -80,11 +80,16 @@ class Connection {
       authStrategy: new LocalAuth({
         clientId: this.id,
       }),
-      webVersion: "2.3000.1012447370",
+      webVersion: "2.2412.54-beta",
       webVersionCache: {
-        type: 'remote',
-        remotePath: 'https://raw.githubusercontent.com/wppconnect-team/wa-version/main/html/2.2410.1.html',
-        },
+        type: "remote",
+        remotePath:
+            "https://raw.githubusercontent.com/wppconnect-team/wa-version/main/html/2.2412.54.html",
+      },
+      puppeteer: {
+          headless: true,
+          args: ['--no-sandbox', '--disable-setuid-sandbox']
+      }
     });
 
     this.client.initialize();
